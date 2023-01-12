@@ -13,7 +13,8 @@
     "noEmitOnError": true,
     "noUnusedLocals": true,
     "noUnusedParameters": true,
-    "noImplicitReturns": true,
+    "noImplicitAny": true,
+    "noImplicitReturns": false,
     "skipLibCheck": true
   },
   "include": ["src"]
