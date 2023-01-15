@@ -1,11 +1,13 @@
 import { Negotiation } from "../models/negotiation.js";
 import { Negotiations } from "../models/negotiations.js";
+import { NegotiationsView } from "../views/negociations-view.js";
 
 export class NegotiationController {
   private _inputDate: HTMLInputElement;
   private _inputQuantity: HTMLInputElement;
   private _inputValue: HTMLInputElement;
   private _negotiations = new Negotiations();
+  private _negotationsView = new NegotiationsView("#table-container");
 
   constructor() {
     this._inputDate = <HTMLInputElement>document.getElementById("data");
@@ -13,6 +15,9 @@ export class NegotiationController {
       document.getElementById("quantidade")
     );
     this._inputValue = <HTMLInputElement>document.getElementById("valor");
+
+    //Using the template method of the view to render the table once the controller is created
+    this._negotationsView.updateView();
   }
 
   cleanForm(): void {

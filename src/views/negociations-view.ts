@@ -1,4 +1,10 @@
 export class NegotiationsView {
+  private element: HTMLElement;
+
+  constructor(selectorElement: string) {
+    this.element = <HTMLElement>document.querySelector(selectorElement);
+  }
+
   //Method to return a string containing the html that we will need to render the list of negotiations
   template(): string {
     return `
@@ -16,5 +22,10 @@ export class NegotiationsView {
     
     </table>
     `;
+  }
+
+  updateView(): void {
+    console.log(this.element);
+    this.element.innerHTML = this.template();
   }
 }
