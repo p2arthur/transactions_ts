@@ -6,13 +6,23 @@ export class Negotiation {
     private readonly _value: number
   ) {}
 
-  get volume(): number {
-    return this._value * this._quantity + 3;
-  }
-
   get date(): Date {
     //Implementing defensive programming to disable other developers to change the _date class property
     const date = new Date(this._date.getTime());
     return date;
+  }
+  get quantity(): number {
+    //Implementing defensive programming to disable other developers to change the _date class property
+
+    return this._quantity;
+  }
+  get value(): number {
+    //Implementing defensive programming to disable other developers to change the _date class property
+
+    return this._value;
+  }
+
+  get volume(): number {
+    return this._value * this._quantity;
   }
 }
