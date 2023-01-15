@@ -17,7 +17,7 @@ export class NegotiationController {
     this._inputValue = <HTMLInputElement>document.getElementById("valor");
 
     //Using the template method of the view to render the table once the controller is created
-    this._negotationsView.updateView();
+    this._negotationsView.updateView(this._negotiations);
   }
 
   cleanForm(): void {
@@ -39,6 +39,8 @@ export class NegotiationController {
     const negotiation = this.createNegotiation();
     this._negotiations.addNewNegotiation(negotiation);
     this.cleanForm();
-    console.log(this._negotiations.getNegotiationsList());
+
+    //Saying to the view to update everytime we add a new negotiation with the negotiations(model) as a parameter
+    this._negotationsView.updateView(this._negotiations);
   }
 }
