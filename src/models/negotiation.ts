@@ -23,6 +23,7 @@ export class Negotiation {
   }
 
   get volume(): number {
-    return this._value * this._quantity;
+    console.log(this._value * this._quantity);
+    return Number((this._value * this._quantity).toFixed(2));
   }
 }
