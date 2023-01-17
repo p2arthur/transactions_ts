@@ -3,7 +3,7 @@ import { View } from "./view.js";
 
 export class NegotiationsView extends View<Negotiations> {
   //Method to return a string containing the html that we will need to render the list of negotiations
-  template(model: Negotiations): string {
+  protected template(model: Negotiations): string {
     return `
     <table class="table table-hover table-bordered">
     <thead>
