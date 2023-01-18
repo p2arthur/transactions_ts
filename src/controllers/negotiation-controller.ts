@@ -10,6 +10,8 @@ export class NegotiationController {
   private _negotiations = new Negotiations();
   private _negotationsView = new NegotiationsView("#table-container");
   private _messageView = new MessageView("#mensagemView");
+  private readonly SABADO = 6;
+  private readonly DOMINGO = 0;
 
   constructor() {
     this._inputDate = <HTMLInputElement>document.getElementById("data");
@@ -24,10 +26,17 @@ export class NegotiationController {
 
   public addNegotiation(): void {
     const negotiation = this.createNegotiation();
+    if (this.isWeekDay(negotiation.date)) {
+      this._messageView.update("You can only add negotiations on weekdays");
+      return;
+    }
     this._negotiations.addNewNegotiation(negotiation);
     this.cleanForm();
     this.updateUi();
-    setTimeout(() => this._messageView.clearMesasage(), 3000);
+  }
+
+  private isWeekDay(date: Date) {
+    return date.getDay() !== this.SABADO || date.getDay() !== this.DOMINGO;
   }
 
   private cleanForm(): void {
@@ -50,5 +59,6 @@ export class NegotiationController {
     //Saying to the view to update everytime we add a new negotiation with the negotiations(model) as a parameter
     this._negotationsView.update(this._negotiations);
     this._messageView.update("Transaction added successfully");
+    setTimeout(() => this._messageView.clearMesasage(), 3000);
   }
 }
