@@ -25,7 +25,7 @@ export class NegotiationController {
 
   public addNegotiation(): void {
     const negotiation = this.createNegotiation();
-    if (this.isWeekDay(negotiation.date)) {
+    if (!this.isWeekDay(negotiation.date)) {
       this._messageView.update(
         "You can only add negotiations on weekdays",
         negotiation

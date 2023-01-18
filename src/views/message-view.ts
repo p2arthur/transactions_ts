@@ -4,13 +4,13 @@ import { View } from "./view.js";
 
 export class MessageView extends View<string, Negotiation> {
   protected template(model: string, negotiation: Negotiation): string {
+    const isWeekDay: boolean =
+      negotiation.date.getDay() !== WeekDays.SATURDAY &&
+      negotiation.date.getDay() !== WeekDays.SUNDAY &&
+      true;
+
     return `
-    <p class="alert ${
-      negotiation.date.getDay() === WeekDays.SATURDAY ||
-      negotiation.date.getDay() === WeekDays.SUNDAY
-        ? "alert-success"
-        : "alert-danger"
-    }">
+    <p class="alert ${isWeekDay ? "alert-success" : "alert-danger"}">
     ${model}
     </p>
     `;
