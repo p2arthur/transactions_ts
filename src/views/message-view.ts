@@ -9,7 +9,7 @@ export class MessageView extends View<string> {
     `;
   }
 
-  clearMesasage(): void {
+  public clearMesasage(): void {
     this._element.innerHTML = "";
   }
 }

@@ -22,14 +22,22 @@ export class NegotiationController {
     this._negotationsView.update(this._negotiations);
   }
 
-  cleanForm(): void {
+  public addNegotiation(): void {
+    const negotiation = this.createNegotiation();
+    this._negotiations.addNewNegotiation(negotiation);
+    this.cleanForm();
+    this.updateUi();
+    setTimeout(() => this._messageView.clearMesasage(), 3000);
+  }
+
+  private cleanForm(): void {
     this._inputDate.value = "";
     this._inputQuantity.value = "";
     this._inputValue.value = "";
     this._inputDate.focus();
   }
 
-  createNegotiation(): Negotiation {
+  private createNegotiation(): Negotiation {
     const date = new Date(this._inputDate.value.replace(/-/g, ","));
     const quantity = parseInt(this._inputQuantity.value);
     const value = parseFloat(this._inputValue.value);
@@ -37,14 +45,10 @@ export class NegotiationController {
     return new Negotiation(date, quantity, value);
   }
 
-  addNegotiation(): void {
-    const negotiation = this.createNegotiation();
-    this._negotiations.addNewNegotiation(negotiation);
-    this.cleanForm();
-
+  //Creating a method to update all views whenever a new transaction is sent
+  private updateUi(): void {
     //Saying to the view to update everytime we add a new negotiation with the negotiations(model) as a parameter
     this._negotationsView.update(this._negotiations);
     this._messageView.update("Transaction added successfully");
-    setTimeout(() => this._messageView.clearMesasage(), 3000);
   }
 }

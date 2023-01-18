@@ -2,7 +2,7 @@ import { Negotiations } from "../models/negotiations.js";
 import { View } from "./view.js";
 
 export class NegotiationsView extends View<Negotiations> {
-  //Method to return a string containing the html that we will need to render the list of negotiations
+  //Protected Method to return a string containing the html that we will need to render the list of negotiations
   protected template(model: Negotiations): string {
     return `
     <table class="table table-hover table-bordered">
@@ -33,6 +33,7 @@ export class NegotiationsView extends View<Negotiations> {
     `;
   }
 
+  //Private method to format the date inside of the negotiations view
   private formatDate(date: Date): string {
     return new Intl.DateTimeFormat().format(date);
   }
