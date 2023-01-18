@@ -1,7 +1,7 @@
 import { Negotiations } from "../models/negotiations.js";
 import { View } from "./view.js";
 
-export class NegotiationsView extends View<Negotiations> {
+export class NegotiationsView extends View<Negotiations, null> {
   //Protected Method to return a string containing the html that we will need to render the list of negotiations
   protected template(model: Negotiations): string {
     return `
