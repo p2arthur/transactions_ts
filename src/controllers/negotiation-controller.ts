@@ -24,7 +24,11 @@ export class NegotiationController {
   }
 
   public addNegotiation(): void {
-    const negotiation = this.createNegotiation();
+    const negotiation = Negotiation.createOf(
+      this._inputDate.value,
+      this._inputQuantity.value,
+      this._inputValue.value
+    );
     if (!this.isWeekDay(negotiation.date)) {
       this._messageView.update(
         "You can only add negotiations on weekdays",
@@ -49,14 +53,6 @@ export class NegotiationController {
     this._inputQuantity.value = "";
     this._inputValue.value = "";
     this._inputDate.focus();
-  }
-
-  private createNegotiation(): Negotiation {
-    const date = new Date(this._inputDate.value.replace(/-/g, ","));
-    const quantity = parseInt(this._inputQuantity.value);
-    const value = parseFloat(this._inputValue.value);
-
-    return new Negotiation(date, quantity, value);
   }
 
   //Creating a method to update all views whenever a new transaction is sent

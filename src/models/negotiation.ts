@@ -1,7 +1,7 @@
 export class Negotiation {
   //In typescript we don't need to define the properties of the class outside of the constructor by using the private or public type
   constructor(
-    private readonly _date: Date,
+    private readonly _date: any,
     private readonly _quantity: number,
     private readonly _value: number
   ) {}
@@ -25,5 +25,18 @@ export class Negotiation {
   public get volume(): number {
     console.log(this._value * this._quantity);
     return Number((this._value * this._quantity).toFixed(2));
+  }
+
+  //Creating a static method inside the model to convert the values coming from the controller from a string to respective formats
+  public static createOf(
+    dateString: string,
+    quantityString: string,
+    valueString: string
+  ): Negotiation {
+    const exp = /-/g;
+    const date = new Date(dateString.replace(exp, ","));
+    const quantity = parseInt(quantityString);
+    const value = parseFloat(valueString);
+    return new Negotiation(date, quantity, value);
   }
 }
