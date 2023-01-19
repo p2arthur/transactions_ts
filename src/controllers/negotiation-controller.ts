@@ -20,7 +20,7 @@ export class NegotiationController {
     this._inputValue = <HTMLInputElement>document.getElementById("valor");
 
     //Using the template method of the view to render the table once the controller is created
-    this._negotationsView.update(this._negotiations, null);
+    this._negotationsView.update(this._negotiations, false);
   }
 
   public addNegotiation(): void {
@@ -29,7 +29,7 @@ export class NegotiationController {
       this._inputQuantity.value,
       this._inputValue.value
     );
-    if (!this.isWeekDay(negotiation.date)) {
+    if (!NegotiationController.isWeekDay(negotiation.date)) {
       this._messageView.update(
         "You can only add negotiations on weekdays",
         negotiation
@@ -42,7 +42,7 @@ export class NegotiationController {
   }
 
   //Defining a method to validate if the negotiation was done in a week day - Implemented the week-days enum
-  private isWeekDay(date: Date) {
+  public static isWeekDay(date: Date) {
     return (
       date.getDay() !== WeekDays.SUNDAY && date.getDay() !== WeekDays.SATURDAY
     );
@@ -58,7 +58,7 @@ export class NegotiationController {
   //Creating a method to update all views whenever a new transaction is sent
   private updateUi(negotiation: Negotiation): void {
     //Saying to the view to update everytime we add a new negotiation with the negotiations(model) as a parameter
-    this._negotationsView.update(this._negotiations, null);
+    this._negotationsView.update(this._negotiations, true);
     this._messageView.update("Transaction added successfully", negotiation);
     setTimeout(() => this._messageView.clearMesasage(), 3000);
   }
