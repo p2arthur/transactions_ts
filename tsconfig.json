@@ -15,7 +15,8 @@
     "noUnusedParameters": true,
     "noImplicitAny": true,
     "noImplicitReturns": false,
-    "skipLibCheck": true
+    "skipLibCheck": true,
+    "removeComments": true
   },
   "include": ["src"]
 }
