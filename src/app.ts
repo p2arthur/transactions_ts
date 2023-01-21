@@ -4,7 +4,11 @@ const negotiationController = new NegotiationController();
 
 const form = document.querySelector(".form");
 
-form?.addEventListener("submit", (event) => {
-  event.preventDefault();
-  negotiationController.addNegotiation();
-});
+if (form) {
+  form.addEventListener("submit", (event) => {
+    event.preventDefault();
+    negotiationController.addNegotiation();
+  });
+} else {
+  throw Error("Unable to start the application: Couldn't select form element");
+}

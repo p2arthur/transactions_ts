@@ -1,5 +1,3 @@
-import { Negotiation } from "../models/negotiation";
-
 export abstract class View<T, K> {
   protected _element: HTMLElement;
   private escape = false;
