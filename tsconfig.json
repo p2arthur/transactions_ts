@@ -16,7 +16,8 @@
     "noImplicitAny": true,
     "noImplicitReturns": false,
     "skipLibCheck": true,
-    "removeComments": true
+    "removeComments": true,
+    "experimentalDecorators": true
   },
   "include": ["src"]
 }
