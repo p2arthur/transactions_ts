@@ -1,9 +1,9 @@
+import { logExecutionTime } from "../decorators/log-execution-time.js";
 import { WeekDays } from "../enums/week-days.js";
 import { Negotiation } from "../models/negotiation.js";
 import { Negotiations } from "../models/negotiations.js";
 import { MessageView } from "../views/message-view.js";
 import { NegotiationsView } from "../views/negotiations-view.js";
-import { logExecutionTime } from "../decorators/log-execution-time.js";
 
 export class NegotiationController {
   private _inputDate: HTMLInputElement;
@@ -25,7 +25,8 @@ export class NegotiationController {
   }
 
   //Invoke a decorator to test the performance of a function
-  @logExecutionTime();
+
+  @logExecutionTime()
   public addNegotiation(): void {
     const negotiation = Negotiation.createOf(
       this._inputDate.value,
