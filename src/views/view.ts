@@ -1,3 +1,5 @@
+import { logExecutionTime } from "../decorators/log-execution-time";
+
 export abstract class View<T, K> {
   protected _element: HTMLElement;
   private escape = false;
@@ -18,8 +20,8 @@ export abstract class View<T, K> {
 
   protected abstract template(model: T, negotiation?: K): string;
 
+  @logExecutionTime()
   public update(model: T, negotiation?: K): void {
-    const t1 = performance.now();
     let template = this.template(model, negotiation);
 
     //Escape to remove malicious scripts added to our template
@@ -27,10 +29,5 @@ export abstract class View<T, K> {
       template = template.replace(/<script>[\s\S]*?<\/script>/, "");
     }
     this._element.innerHTML = template;
-
-    const t2 = performance.now();
-    console.log(
-      `Execution time for the update method: ${(t2 - t1) / 1000} seconds`
-    );
   }
 }
