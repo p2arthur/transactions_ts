@@ -1,4 +1,3 @@
-import { Negotiation } from "../models/negotiation.js";
 import { Negotiations } from "../models/negotiations.js";
 import { View } from "./view.js";
 

@@ -7,7 +7,7 @@ export function logExecutionTime(inSeconds: boolean = false) {
   ) {
     const originalMethod = descriptor.value;
     descriptor.value = function (...args: any[]) {
-      let divider = !inSeconds ? 1000 : 1;
+      let divider = !inSeconds ? 1 : 1000;
       let unity = !inSeconds ? "miliseconds" : "seconds";
       const t1 = performance.now();
       const originalMethodReturn = originalMethod.apply(this, args);

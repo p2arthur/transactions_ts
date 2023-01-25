@@ -20,7 +20,7 @@ export abstract class View<T, K> {
 
   protected abstract template(model: T, negotiation?: K): string;
 
-  @logExecutionTime()
+  @logExecutionTime(true)
   public update(model: T, negotiation?: K): void {
     let template = this.template(model, negotiation);
 
