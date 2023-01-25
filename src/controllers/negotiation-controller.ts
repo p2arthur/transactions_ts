@@ -1,3 +1,4 @@
+import { inspectMethod } from "../decorators/inspect-method.js";
 import { logExecutionTime } from "../decorators/log-execution-time.js";
 import { WeekDays } from "../enums/week-days.js";
 import { Negotiation } from "../models/negotiation.js";
@@ -24,8 +25,9 @@ export class NegotiationController {
     this._negotationsView.update(this._negotiations, false);
   }
 
-  //Invoke a decorator with parameter to test the performance of a function
+  //Invoke a decorator to test the performance of a function
   @logExecutionTime()
+  @inspectMethod()
   public addNegotiation(): void {
     const negotiation = Negotiation.createOf(
       this._inputDate.value,
@@ -45,7 +47,7 @@ export class NegotiationController {
   }
 
   //Defining a method to validate if the negotiation was done in a week day - Implemented the week-days enum
-  public static isWeekDay(date: Date) {
+  public static isWeekDay(date: Date): boolean {
     return (
       date.getDay() !== WeekDays.SUNDAY && date.getDay() !== WeekDays.SATURDAY
     );
