@@ -27,7 +27,7 @@ export class NegotiationController {
 
   //Invoke a decorator to test the performance of a function
   @logExecutionTime()
-  @inspectMethod()
+  @inspectMethod
   public addNegotiation(): void {
     const negotiation = Negotiation.createOf(
       this._inputDate.value,

@@ -22,7 +22,7 @@ export abstract class View<T, K> {
   protected abstract template(model: T, negotiation?: K): string;
   //Invoke a decorator with argument to test the performance of a function
   @logExecutionTime(true)
-  @inspectMethod()
+  @inspectMethod
   public update(model: T, negotiation?: K): void {
     let template = this.template(model, negotiation);
 
