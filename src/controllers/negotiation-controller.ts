@@ -24,8 +24,7 @@ export class NegotiationController {
     this._negotationsView.update(this._negotiations, false);
   }
 
-  //Invoke a decorator to test the performance of a function
-
+  //Invoke a decorator with parameter to test the performance of a function
   @logExecutionTime()
   public addNegotiation(): void {
     const negotiation = Negotiation.createOf(
