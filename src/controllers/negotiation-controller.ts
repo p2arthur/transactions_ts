@@ -5,22 +5,20 @@ import { Negotiation } from "../models/negotiation.js";
 import { Negotiations } from "../models/negotiations.js";
 import { MessageView } from "../views/message-view.js";
 import { NegotiationsView } from "../views/negotiations-view.js";
+import { domInjector } from "../decorators/dom-injector.js";
 
 export class NegotiationController {
+  @domInjector("#data")
   private _inputDate: HTMLInputElement;
+  @domInjector("#quantidade")
   private _inputQuantity: HTMLInputElement;
+  @domInjector("#valor")
   private _inputValue: HTMLInputElement;
   private _negotiations = new Negotiations();
   private _negotationsView = new NegotiationsView("#table-container");
   private _messageView = new MessageView("#mensagemView");
 
   constructor() {
-    this._inputDate = <HTMLInputElement>document.getElementById("data");
-    this._inputQuantity = <HTMLInputElement>(
-      document.getElementById("quantidade")
-    );
-    this._inputValue = <HTMLInputElement>document.getElementById("valor");
-
     //Using the template method of the view to render the table once the controller is created
     this._negotationsView.update(this._negotiations);
   }
