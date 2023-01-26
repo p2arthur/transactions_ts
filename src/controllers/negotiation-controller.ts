@@ -22,7 +22,7 @@ export class NegotiationController {
     this._inputValue = <HTMLInputElement>document.getElementById("valor");
 
     //Using the template method of the view to render the table once the controller is created
-    this._negotationsView.update(this._negotiations, false);
+    this._negotationsView.update(this._negotiations);
   }
 
   //Invoke a decorator to test the performance of a function

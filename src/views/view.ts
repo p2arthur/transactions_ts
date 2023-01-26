@@ -3,9 +3,8 @@ import { logExecutionTime } from "../decorators/log-execution-time";
 
 export abstract class View<T, K> {
   protected _element: HTMLElement;
-  private escape = false;
 
-  constructor(selectorElement: string, escape?: boolean) {
+  constructor(selectorElement: string) {
     const element = document.querySelector(selectorElement);
     if (element) {
       this._element = <HTMLElement>element;
@@ -13,9 +12,6 @@ export abstract class View<T, K> {
       throw Error(
         `Selector ${selectorElement} doesn't exist at the DOM and returned null`
       );
-    }
-    if (escape) {
-      this.escape = escape;
     }
   }
 
@@ -27,9 +23,6 @@ export abstract class View<T, K> {
     let template = this.template(model, negotiation);
 
     //Escape to remove malicious scripts added to our template
-    if (this.escape) {
-      template = template.replace(/<script>[\s\S]*?<\/script>/, "");
-    }
     this._element.innerHTML = template;
   }
 }
