@@ -1,3 +1,4 @@
+import { domInjector } from "../decorators/dom-injector.js";
 import { inspectMethod } from "../decorators/inspect-method.js";
 import { logExecutionTime } from "../decorators/log-execution-time.js";
 import { WeekDays } from "../enums/week-days.js";
@@ -7,8 +8,14 @@ import { MessageView } from "../views/message-view.js";
 import { NegotiationsView } from "../views/negotiations-view.js";
 
 export class NegotiationController {
+  //BUG
+  @domInjector("#data")
   private _inputDate: HTMLInputElement;
+  //BUG
+  @domInjector("#quantidade")
   private _inputQuantity: HTMLInputElement;
+  //BUG
+  @domInjector("#valor")
   private _inputValue: HTMLInputElement;
   private _negotiations = new Negotiations();
   private _negotationsView = new NegotiationsView("#table-container");
@@ -16,11 +23,15 @@ export class NegotiationController {
 
   constructor() {
     //Using the template method of the view to render the table once the controller is created
+
+    //BUG - Trying to substitute these selector with propertie decorator
+    /*
     this._inputDate = <HTMLInputElement>document.querySelector("#data");
     this._inputQuantity = <HTMLInputElement>(
       document.querySelector("#quantidade")
     );
     this._inputValue = <HTMLInputElement>document.querySelector("#valor");
+    */
     this._negotationsView.update(this._negotiations);
   }
 
@@ -28,13 +39,15 @@ export class NegotiationController {
   @logExecutionTime(true)
   @inspectMethod
   public addNegotiation(): void {
-    console.log(this._inputDate);
-    console.log(this._inputQuantity);
-    console.log(this._inputValue);
+    console.log(this._inputDate); //undefined
+    console.log(this._inputQuantity); //undefined
+    console.log(this._inputValue); //undefined
     const negotiation = Negotiation.createOf(
+      //BUG
       this._inputDate.value,
       this._inputQuantity.value,
       this._inputValue.value
+      //BUG
     );
     if (!NegotiationController.isWeekDay(negotiation.date)) {
       this._messageView.update(
