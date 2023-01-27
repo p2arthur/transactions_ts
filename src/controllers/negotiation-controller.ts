@@ -5,14 +5,10 @@ import { Negotiation } from "../models/negotiation.js";
 import { Negotiations } from "../models/negotiations.js";
 import { MessageView } from "../views/message-view.js";
 import { NegotiationsView } from "../views/negotiations-view.js";
-import { domInjector } from "../decorators/dom-injector.js";
 
 export class NegotiationController {
-  @domInjector("#data")
   private _inputDate: HTMLInputElement;
-  @domInjector("#quantidade")
   private _inputQuantity: HTMLInputElement;
-  @domInjector("#valor")
   private _inputValue: HTMLInputElement;
   private _negotiations = new Negotiations();
   private _negotationsView = new NegotiationsView("#table-container");
@@ -20,13 +16,21 @@ export class NegotiationController {
 
   constructor() {
     //Using the template method of the view to render the table once the controller is created
+    this._inputDate = <HTMLInputElement>document.querySelector("#data");
+    this._inputQuantity = <HTMLInputElement>(
+      document.querySelector("#quantidade")
+    );
+    this._inputValue = <HTMLInputElement>document.querySelector("#valor");
     this._negotationsView.update(this._negotiations);
   }
 
   //Invoke a decorator to test the performance of a function
-  @logExecutionTime()
+  @logExecutionTime(true)
   @inspectMethod
   public addNegotiation(): void {
+    console.log(this._inputDate);
+    console.log(this._inputQuantity);
+    console.log(this._inputValue);
     const negotiation = Negotiation.createOf(
       this._inputDate.value,
       this._inputQuantity.value,
